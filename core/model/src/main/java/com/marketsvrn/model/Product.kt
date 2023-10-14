@@ -20,8 +20,8 @@ data class Product (
                 placeId = 0,
                 description = "Кюфта — род фрикаделек. Традиционное блюдо стран Ближнего Востока, Балкан, Кавказа, а также Центральной и Южной Азии. ",
                 images = listOf(
-                    "https://avatars.mds.yandex.net/get-altay/1335362/2a00000185f37df673c70d2e2dc23f45a08d/XXXL",
-                    "https://avatars.mds.yandex.net/get-altay/1335362/2a00000185f37df673c70d2e2dc23f45a08d/XXXL"
+                    "https://buy.am/media/image/9e/2e/b9/Carrefour_0019_86083_01.jpg",
+                    "https://жар-мясо.рф/uploads/catalog/f2f1dc238da11746820f2a79569f590f.jpg"
                 ),
                 name = "Армянская кюфта",
                 price = 1.0f,

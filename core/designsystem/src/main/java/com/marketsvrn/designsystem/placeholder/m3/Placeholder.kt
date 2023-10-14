@@ -1,5 +1,6 @@
 package com.marketsvrn.designsystem.placeholder.m3
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.core.FiniteAnimationSpec
 import androidx.compose.animation.core.Transition
 import androidx.compose.animation.core.spring
@@ -91,6 +92,7 @@ fun PlaceholderDefaults.shimmerHighlightColor(
  * @param contentFadeTransitionSpec The transition spec to use when fading the content
  * on/off screen. The boolean parameter defined for the transition is [visible].
  */
+@SuppressLint("ModifierFactoryUnreferencedReceiver")
 fun Modifier.placeholder(
     visible: Boolean,
     color: Color = Color.Unspecified,

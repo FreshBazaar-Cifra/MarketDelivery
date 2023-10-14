@@ -37,7 +37,9 @@ class RealFavoritesComponent(
     }
 
     override fun selectFavorite(id: Int) {
-        TODO("Not yet implemented")
+    }
+
+    override fun removeFavorite(id: Int) {
     }
 
 

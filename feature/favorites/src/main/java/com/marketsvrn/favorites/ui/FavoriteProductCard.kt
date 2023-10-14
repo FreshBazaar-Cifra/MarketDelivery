@@ -1,6 +1,7 @@
 package com.marketsvrn.favorites.ui
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,10 +14,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,11 +37,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.marketsvrn.designsystem.extendedtheme.ExtendedTheme
-import com.marketsvrn.favorites.R
 import com.marketsvrn.model.Product
 import kotlin.math.roundToInt
 
@@ -46,7 +51,8 @@ val CORNER_SHAPE = RoundedCornerShape(18.dp)
 @Composable
 internal fun FavoriteProductCard(
     product: Product,
-    selectOrder: (Int) -> Unit,
+    selectFavorite: (Int) -> Unit,
+    removeFavorite: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val roundedTotal = remember {
@@ -57,24 +63,23 @@ internal fun FavoriteProductCard(
             .width(IntrinsicSize.Max)
             .height(IntrinsicSize.Max),
         elevation = CardDefaults.outlinedCardElevation(0.dp, 0.dp, 0.dp, 0.dp, 0.dp, 0.dp),
-        border = BorderStroke(2.dp, ExtendedTheme.colors.darkGreen),
+        border = BorderStroke(Dp.Unspecified, ExtendedTheme.colors.darkGreen),
         shape = CORNER_SHAPE,
         onClick = {
-            selectOrder(product.id)
+            selectFavorite(product.id)
         }
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .width(IntrinsicSize.Max)
-                .height(IntrinsicSize.Max),
+                .height(IntrinsicSize.Max)
+                .padding(end = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.End)
         ) {
             CardImage(
                 url = product.images[0],
-                shape = CORNER_SHAPE,
-                borderStroke = BorderStroke(2.dp, ExtendedTheme.colors.darkGreen),
                 modifier = Modifier
                     .width(115.dp)
                     .aspectRatio(1f, true)
@@ -83,7 +88,7 @@ internal fun FavoriteProductCard(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(2.dp),
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .weight(1f)
                     .fillMaxHeight()
                     .padding(horizontal = 10.dp)
                     .width(IntrinsicSize.Max)
@@ -98,37 +103,69 @@ internal fun FavoriteProductCard(
                         .height(IntrinsicSize.Max),
                     verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
-                    CardUpperRow(
+                    Text(
                         text = product.name,
-                        iconId = R.drawable.geoicon,
+                        modifier = Modifier.fillMaxWidth(),
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.W600,
+                        textAlign = TextAlign.Start,
+                        style = TextStyle(
+                            lineBreak = LineBreak.Heading,
+                        ),
+                        overflow = TextOverflow.Ellipsis,
+                        lineHeight = 18.sp,
+                        color = ExtendedTheme.colors.onContainer
+                    )
+                    Row(
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.Bottom,
                         modifier = Modifier
                             .fillMaxWidth()
-                    )
+                            .padding(bottom = 10.dp)
+                    ) {
+                        CardTotalText(
+                            modifier = Modifier.weight(1f),
+                            text = "$roundedTotal ₽"
+                        )
+                    }
                 }
-                Row(
-                    horizontalArrangement = Arrangement.Start,
-                    verticalAlignment = Alignment.Bottom,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 10.dp)
-                ) {
-                    CardTotalText(
-                        modifier = Modifier.weight(1f),
-                        text = "$roundedTotal ₽"
-                    )
-                }
+
             }
+            FavoriteIconButton(
+                modifier = Modifier,
+                onClick = {
+                    removeFavorite(product.id)
+                }
+            )
         }
 
     }
 }
 
 @Composable
+fun FavoriteIconButton(modifier: Modifier, onClick: () -> Unit) {
+    IconButton(
+        onClick = onClick,
+        modifier = modifier
+            .clip(CircleShape)
+            .background(ExtendedTheme.colors.brightGreen)
+    ) {
+        Icon(
+            imageVector = Icons.Filled.Star,
+            contentDescription = null,
+            modifier = Modifier,
+            tint = ExtendedTheme.colors.container
+        )
+    }
+
+}
+
+@Composable
 private fun CardImage(
     modifier: Modifier = Modifier,
     url: String,
-    shape: Shape,
-    borderStroke: BorderStroke
+    shape: Shape = CORNER_SHAPE,
+    borderStroke: BorderStroke = BorderStroke(2.dp, ExtendedTheme.colors.darkGreen)
 ) {
     Box(
         modifier = modifier
@@ -170,19 +207,7 @@ private fun CardUpperRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         CardUpperIcon(iconId = iconId)
-        Text(
-            text = text,
-            modifier = modifier,
-            fontSize = 18.sp,
-            fontWeight = FontWeight.W400,
-            textAlign = TextAlign.Start,
-            style = TextStyle(
-                lineBreak = LineBreak.Heading,
-            ),
-            overflow = TextOverflow.Ellipsis,
-            lineHeight = 18.sp,
-            color = ExtendedTheme.colors.onContainer
-        )
+
     }
 }
 
@@ -194,7 +219,7 @@ private fun CardTotalText(
     Text(
         text = text,
         modifier = modifier,
-        fontSize = 28.sp,
+        fontSize = 24.sp,
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Start,
         lineHeight = 16.sp,

@@ -7,5 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 interface FavoritesComponent {
     fun refreshFavorites()
     fun selectFavorite(id: Int)
+    fun removeFavorite(id: Int)
+
     val favorites: StateFlow<Resource<List<Product>>>
 }

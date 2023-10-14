@@ -13,6 +13,10 @@ class FakeFavoritesComponent: FavoritesComponent {
         TODO("Not yet implemented")
     }
 
+    override fun removeFavorite(id: Int) {
+        TODO("Not yet implemented")
+    }
+
     override val favorites: StateFlow<Resource<List<Product>>>
         get() = TODO("Not yet implemented")
 }

@@ -62,7 +62,8 @@ fun FavoritesScreen(
                             product = it[index],
                             modifier = Modifier
                                 .fillMaxWidth(),
-                            selectOrder = component::selectFavorite
+                            selectFavorite = component::selectFavorite,
+                            removeFavorite = component::removeFavorite
                         )
 
                     }

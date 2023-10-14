@@ -77,8 +77,8 @@ object FakeModels {
     internal val FAKE_PLACE_DTO = PlaceDTO(
         id = 0,
         name = "Свежие фрукты от Ивана",
-        logo = "https://avatars.mds.yandex.net/get-altay/1335362/2a00000185f37df673c70d2e2dc23f45a08d/XXXL",
-        description = "Lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem lorem ipsum dolor sit amet lorem",
+        logo = "https://mokshan.pnzreg.ru/upload/iblock/e60/e60a3b3764b665093295f854820a1ee0.jpg",
+        description = "Лучшие фрукты и овощи по низким ценам!",
         locationPhoto = "https://s1.media.ngoisao.vn/news/2021/06/07/meo-uop-va-xao-thit-bo-ngoisaovn-6-ngoisaovn-w1080-h648.jpg",
         phones = listOf("+78005553535", "+78005553535", "+78005553535"),
         market = FAKE_MARKET_DTO,
@@ -127,12 +127,12 @@ object FakeModels {
         placeId = 0,
         description = "Описание товара",
         images = listOf(
-            "https://avatars.mds.yandex.net/get-altay/1335362/2a00000185f37df673c70d2e2dc23f45a08d/XXXL",
-            "https://avatars.mds.yandex.net/get-altay/1335362/2a00000185f37df673c70d2e2dc23f45a08d/XXXL",
-            "https://avatars.mds.yandex.net/get-altay/1335362/2a00000185f37df673c70d2e2dc23f45a08d/XXXL"
+            "https://buy.am/media/image/9e/2e/b9/Carrefour_0019_86083_01.jpg",
+            "https://buy.am/media/image/9e/2e/b9/Carrefour_0019_86083_01.jpg",
+            "https://buy.am/media/image/9e/2e/b9/Carrefour_0019_86083_01.jpg"
         ),
-        name = "Название товара",
-        price = 5.66f,
+        name = "Армянская кюфта",
+        price = 450f,
         attributes = emptyList(),
         estimate = 5.0f,
         weight = 500,

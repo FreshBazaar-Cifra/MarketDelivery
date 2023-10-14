@@ -20,6 +20,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
@@ -128,12 +129,20 @@ fun ProductDetailsView(
             onClick = {
 
             },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = ExtendedTheme.colors.brightGreen
+            ),
             shape = RectangleShape,
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
         ) {
-            Text(text = "400₽ +")
+            Text(
+                text = "400₽+",
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                color = ExtendedTheme.colors.onContainer
+            )
         }
     }
 }
