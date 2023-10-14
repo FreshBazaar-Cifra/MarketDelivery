@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option java_package = "com.marketsvrn.datastore";
+option java_multiple_files = true;
+
+message AppPreferences {
+  bool shown_onboarding = 1;
+}
