@@ -12,11 +12,11 @@ data class User(
         fun getStub(): User {
             return User(
                 id = 0,
-                firstName = "Александр",
-                lastName = "Ерешкин",
+                firstName = "Имя",
+                lastName = "Фамилия",
                 phone = "+79201234567",
                 email = "blabla@mail.ru",
-                login = "AlexEreh"
+                login = "test"
             )
         }
     }

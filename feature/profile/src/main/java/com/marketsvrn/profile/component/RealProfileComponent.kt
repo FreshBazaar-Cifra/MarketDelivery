@@ -15,6 +15,7 @@ class RealProfileComponent(
 ) : ProfileComponent, BaseComponent(componentContext) {
     private val _profile: StateFlow<Resource<User>> = MutableStateFlow(Resource.success(User.getStub()))
     private val repo: UserRepository by inject()
+    fun refreshUser(){}
     override fun onLogOut() {
         repo.logOut()
         onLogOutAction()
