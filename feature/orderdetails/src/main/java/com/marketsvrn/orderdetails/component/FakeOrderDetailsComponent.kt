@@ -11,4 +11,7 @@ class FakeOrderDetailsComponent: OrderDetailsComponent {
 
     override fun selectProduct(id: Int) {
     }
+
+    override fun refreshOrders() {
+    }
 }

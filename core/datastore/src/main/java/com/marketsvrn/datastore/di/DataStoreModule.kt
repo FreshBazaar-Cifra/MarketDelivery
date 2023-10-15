@@ -18,6 +18,7 @@ import org.koin.dsl.module
 val datastoreModule = module {
     single<TokenStorage> {
         RealTokenStorage(get(named("prefsStore")))
+        //FakeTokenStorage()
         /*if (FAKE_TOKEN) {
             FakeTokenStorage()
 

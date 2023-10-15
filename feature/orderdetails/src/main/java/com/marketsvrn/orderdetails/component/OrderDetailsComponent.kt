@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.StateFlow
 interface OrderDetailsComponent {
     val order: StateFlow<Resource<Order>>
     fun selectProduct(id: Int)
+    fun refreshOrders()
 }

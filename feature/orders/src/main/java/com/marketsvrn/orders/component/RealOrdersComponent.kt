@@ -1,7 +1,7 @@
 package com.marketsvrn.orders.component
 
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.essenty.lifecycle.doOnCreate
+import com.arkivanov.essenty.lifecycle.doOnResume
 import com.marketsvrn.common.Resource
 import com.marketsvrn.data.repository.orders.OrdersRepository
 import com.marketsvrn.designsystem.util.BaseComponent
@@ -52,6 +52,8 @@ class RealOrdersComponent(
     }
 
     init {
-        lifecycle.doOnCreate(::refreshOrders)
+        lifecycle.doOnResume {
+            refreshOrders()
+        }
     }
 }

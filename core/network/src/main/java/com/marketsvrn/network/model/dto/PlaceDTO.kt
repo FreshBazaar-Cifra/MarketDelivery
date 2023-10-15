@@ -11,7 +11,7 @@ data class PlaceDTO(
     val description: String,
     val locationPhoto: String,
     val phones: List<String>,
-    val estimate: Float,
+    val estimate: Float?,
     val market: MarketDTO,
     val workingHours: List<WorkingHoursDTO>
 ) {
@@ -23,6 +23,7 @@ data class PlaceDTO(
             description = description,
             locationPhoto = locationPhoto,
             phones = phones,
+            estimate = estimate,
             market = market.asDomainModel(),
             workingHours = workingHours.map {
                 it.asDomainModel()

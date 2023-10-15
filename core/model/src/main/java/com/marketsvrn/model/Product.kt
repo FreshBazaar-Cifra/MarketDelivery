@@ -9,7 +9,7 @@ data class Product (
     val price: Float,
     val weight: Int,
     val category: ProductCategory,
-    val estimate: Float,
+    val estimate: Float?,
     val attributes: List<Attribute>,
     val manufacturer: String
 ) {

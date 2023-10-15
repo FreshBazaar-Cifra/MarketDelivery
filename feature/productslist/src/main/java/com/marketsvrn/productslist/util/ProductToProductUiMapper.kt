@@ -14,7 +14,7 @@ class ProductToProductUiMapper : AbstractListResourceMapper<Product, ProductUi>(
             name = it.name,
             weight = "${it.weight}",
             price = "$priceRounded ₽",
-            estimate = "${(it.estimate * 10.0).roundToInt() / 10.0}"
+            estimate = "${((it.estimate?.times(10.0))?.roundToInt() ?: 50) / 10.0}"
         )
     }
 )

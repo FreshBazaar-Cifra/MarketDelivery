@@ -16,13 +16,13 @@ import com.marketsvrn.network.datasource.PlacesDataSource
 import com.marketsvrn.network.datasource.ProductsDataSource
 import com.marketsvrn.network.datasource.PromoDataSource
 import com.marketsvrn.network.datasource.UserDataSource
-import com.marketsvrn.network.fake.FakeFavoritesDataSource
-import com.marketsvrn.network.fake.FakeMarketsDataSource
-import com.marketsvrn.network.fake.FakeOrdersDataSource
-import com.marketsvrn.network.fake.FakePlacesDataSource
-import com.marketsvrn.network.fake.FakeProductsDataSource
-import com.marketsvrn.network.fake.FakePromoDataSource
-import com.marketsvrn.network.fake.FakeUserDataSource
+import com.marketsvrn.network.retrofit.RetrofitFavoriteDataSource
+import com.marketsvrn.network.retrofit.RetrofitMarketsDataSource
+import com.marketsvrn.network.retrofit.RetrofitOrdersDataSource
+import com.marketsvrn.network.retrofit.RetrofitPlacesDataSource
+import com.marketsvrn.network.retrofit.RetrofitProductsDataSource
+import com.marketsvrn.network.retrofit.RetrofitPromoDataSource
+import com.marketsvrn.network.retrofit.RetrofitUserDataSource
 import com.marketsvrn.network.util.AuthInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -34,44 +34,44 @@ val authNetworkModule = module {
     includes(datastoreModule)
 
     single<FavoriteDataSource> {
-        FakeFavoritesDataSource(
-            //api = get()
+        RetrofitFavoriteDataSource(
+            api = get()
         )
     }
 
     single<MarketsDataSource> {
-        FakeMarketsDataSource(
-            //api = get()
+        RetrofitMarketsDataSource(
+            api = get()
         )
     }
 
     single<OrdersDataSource> {
-        FakeOrdersDataSource(
-            //api = get()
+        RetrofitOrdersDataSource(
+            api = get()
         )
     }
 
     single<PlacesDataSource> {
-        FakePlacesDataSource(
-            //api = get()
+        RetrofitPlacesDataSource(
+            api = get()
         )
     }
 
     single<ProductsDataSource> {
-        FakeProductsDataSource(
-            //api = get()
+        RetrofitProductsDataSource(
+            api = get()
         )
     }
 
     single<PromoDataSource> {
-        FakePromoDataSource(
-            //api = get()
+        RetrofitPromoDataSource(
+            api = get()
         )
     }
 
     single<UserDataSource> {
-        FakeUserDataSource(
-            //api = get()
+        RetrofitUserDataSource(
+            api = get()
         )
     }
 

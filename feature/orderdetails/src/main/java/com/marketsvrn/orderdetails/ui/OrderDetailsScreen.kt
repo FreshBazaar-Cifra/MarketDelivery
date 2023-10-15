@@ -19,6 +19,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,45 +29,60 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.marketsvrn.designsystem.common.ErrorView
+import com.marketsvrn.designsystem.common.ResourceView
 import com.marketsvrn.designsystem.extendedtheme.ExtendedTheme
 import com.marketsvrn.designsystem.theme.DeliveryTheme
 import com.marketsvrn.designsystem.util.screenModifier
-import com.marketsvrn.model.Market
 import com.marketsvrn.model.Position
 import com.marketsvrn.orderdetails.component.FakeOrderDetailsComponent
 import com.marketsvrn.orderdetails.component.OrderDetailsComponent
+import kotlin.math.roundToInt
 
 @Composable
 fun OrderDetailsScreen(
     component: OrderDetailsComponent,
     modifier: Modifier = Modifier
 ) {
+    val order by component.order.collectAsStateWithLifecycle()
     val verticalScroll = rememberScrollState()
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Top),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .statusBarsPadding()
-            .padding(top = 20.dp)
-            .padding(horizontal = 10.dp)
-            .verticalScroll(verticalScroll),
-    ) {
-        BigMarketCard(market = Market.getStub())
-        OrderProducts()
-        TotalSupplementaryText()
-        TotalPriceText()
-        AddressCommentRatingCard(
-            addressString = "Воронеж, Шишкова 146, кв. 144",
-            comment = "Возьмите, пожалуйста, свежее мясо",
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
+    ResourceView(
+        errorView = {
+            ErrorView(message = it ?: "No error message", onRetry = { component.refreshOrders() })
+        },
+        successView = {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Top),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = modifier
+                    .statusBarsPadding()
+                    .padding(top = 20.dp)
+                    .padding(horizontal = 10.dp)
+                    .verticalScroll(verticalScroll),
+            ) {
+                BigMarketCard(market = it.market)
+                OrderProducts(positions = it.positions)
+                TotalSupplementaryText()
+                TotalPriceText(text = it.total)
+                AddressCommentRatingCard(
+                    addressString = it.address.getAddressAsString(),
+                    comment = "нет",
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        },
+        resource = order
+    )
+
 }
 
 @Composable
 fun OrderProducts(
-    modifier: Modifier = Modifier
-) {
+    modifier: Modifier = Modifier,
+    positions: List<Position>,
+
+    ) {
     OutlinedCard(
         modifier = modifier
             .wrapContentSize(),
@@ -81,9 +97,9 @@ fun OrderProducts(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Spacer(modifier = Modifier.height(6.dp))
-            repeat(5){
+            positions.forEach{
                 ProductCard(
-                    position = Position.getStub(),
+                    position = it,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp)
@@ -131,7 +147,7 @@ fun ProductCard(
                 horizontalArrangement = Arrangement.spacedBy(18.dp, Alignment.End)
             ) {
                 Text(text = "2 шт.", fontSize = 14.sp)
-                ProductPriceText(price = "44₽")
+                ProductPriceText(price = "${position.product.price.roundToInt()}₽")
             }
 
         }
@@ -190,10 +206,11 @@ fun TotalSupplementaryText(
 
 @Composable
 fun TotalPriceText(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    text: Float
 ) {
     Text(
-        text = "440₽",
+        text = "${text.roundToInt()}₽",
         modifier = modifier,
         fontSize = 50.sp,
         fontWeight = FontWeight.Black,

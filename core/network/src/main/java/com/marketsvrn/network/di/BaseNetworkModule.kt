@@ -18,10 +18,10 @@ val baseNetworkModule = module {
         }
     }
     single(named("mainEndpoint")){
-        Endpoint("http://localhost/")
+        Endpoint("https://api.freshbazaa.ru/")
     }
     single(named("authEndpoint")){
-        Endpoint("http://localhost/")
+        Endpoint("https://auth.freshbazaa.ru/")
     }
     single<Json> {
         Json {

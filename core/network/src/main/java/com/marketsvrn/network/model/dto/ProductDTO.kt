@@ -13,7 +13,7 @@ data class ProductDTO(
     val price: Float,
     val weight: Int,
     val category: ProductCategoryDTO,
-    val estimate: Float,
+    val estimate: Float?,
     val attributes: List<ProductAttributeDTO>,
     val manufacturer: String
 ) {

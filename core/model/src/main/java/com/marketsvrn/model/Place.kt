@@ -8,6 +8,7 @@ data class Place (
     val locationPhoto: String,
     val phones: List<String>,
     val market: Market,
+    val estimate: Float?,
     val workingHours: List<WorkingHours>
 ) {
     companion object {
@@ -20,6 +21,7 @@ data class Place (
                 locationPhoto = "https://avatars.mds.yandex.net/get-altay/1335362/2a00000185f37df673c70d2e2dc23f45a08d/XXXL",
                 phones = listOf("+78005553535", "+78005553535", "+78005553535"),
                 market = Market.getStub(),
+                estimate = 5.0f,
                 workingHours = listOf(
                     WorkingHours(
                         dayOfWeek = 0,

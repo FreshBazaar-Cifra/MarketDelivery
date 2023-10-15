@@ -115,7 +115,7 @@ fun ProductDetailsView(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 10.dp),
-                estimate = product.estimate,
+                estimate = product.estimate?: Float.NaN,
                 onEstimateAction = {
                     openDialog.value = true
                 }
@@ -172,7 +172,6 @@ fun DetailsCard(
             verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
             UpperDetailsCardRow(
-                selectedFavorite = true,
                 onSelectFavorite = {
 
                 },
@@ -264,7 +263,6 @@ fun AttributesList(
 @Composable
 fun UpperDetailsCardRow(
     modifier: Modifier = Modifier,
-    selectedFavorite: Boolean,
     onSelectFavorite: () -> Unit,
     weight: String,
     name: String
