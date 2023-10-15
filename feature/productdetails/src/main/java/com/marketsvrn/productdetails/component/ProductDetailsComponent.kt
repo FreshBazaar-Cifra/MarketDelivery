@@ -11,4 +11,5 @@ interface ProductDetailsComponent {
     }
     val estimateDialogComponent: EstimateDialogComponent
     val product: StateFlow<Resource<ProductUi>>
+    fun refreshProduct()
 }

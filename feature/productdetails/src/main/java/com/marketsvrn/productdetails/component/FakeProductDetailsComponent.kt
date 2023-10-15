@@ -14,4 +14,7 @@ class FakeProductDetailsComponent: ProductDetailsComponent {
         get() = FakeEstimateDialogComponent()
     override val product: StateFlow<Resource<ProductUi>>
         get() = MutableStateFlow(ProductToProductUiMapper().map(Resource.success(Product.getStub())))
+
+    override fun refreshProduct() {
+    }
 }
